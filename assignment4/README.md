@@ -6,14 +6,14 @@ Sean Hogan's [Intro to Unix](http://csil.cs.uchicago.edu/assets/unix_i.pdf) docu
 ### Accessing a *Shell*
 To access a shell on OS X, run the Terminal program, accessible via the `Utilities/` subdirectory of the `/Applications` directory.
 
-To access a shell on Windows, run the Cygwin terminal, which (if you installed Cygwin successfully) should be available from your Windows desktop. 
+To access a shell on Windows, run the Cygwin terminal, which (if you installed Cygwin successfully) should be available from your Windows desktop.
 
-To access a shell with Windows/Vagrant (if you installed Vagrant), run `vagrant ssh`. 
+To access a shell with Windows/Vagrant (if you installed Vagrant), run `vagrant ssh`.
 
 ### Basic Shell Commands
-`ls`: List all directories in the current working directory. 
+`ls`: List all directories in the current working directory.
 
-`pwd`: Print current working directory. 
+`pwd`: Print current working directory.
 
 `cd [directoryname]`: Change directory to a directory called `directoryname`.
 
@@ -47,7 +47,7 @@ branch master / Your branch is up-to-date with 'origin/master'`.
 For this assignment we will be using data from the City of Chicago data portal consisting of data on
 all of the building permits issued by the city since 2006. We will be
 accessing a subset of the data as a CSV (comma-separated values) file, but it is
-useful to first examine the structure of the data in your browser at 
+useful to first examine the structure of the data in your browser at
 [City of Chicago data portal Building Permits](https://data.cityofchicago.org/Buildings/Building-Permits/ydr8-5enu).
 
 At your command line, download our curated Building Permits subset .csv file by typing the command:
@@ -63,7 +63,7 @@ the file using the command `du -h permits.csv`.) Instead, create a
 `.gitignore` file by typing `touch .gitignore` and then opening it in
 the text editor of your choice (e.g. SublimeText or TextWrangler).
 
-### 1.2: `.gitignore` 
+### 1.2: `.gitignore`
 The `.gitignore` file tells git to ignore any
 file in the repository whose name matches a certain pattern. Each line
 of the `.gitignore` file is a separate
@@ -79,7 +79,7 @@ Now add your .gitignore to your repository by typing at the command line:
 2. `git commit -m "adding gitignore"`
 
 
-## Part 2. Basic finding using grep, wc. 
+## Part 2. Basic finding using grep, wc.
 Okay, now that we have have an environment set up to do data analysis,
 write a shell script (.sh) file that does the following two things
 with the permit data you downloaded above. (A shell script is simply a
@@ -89,7 +89,7 @@ script.sh` at the shell prompt.)
 1. Print out how many rows are in the dataset. (consider using `wc -l`)
 2. Find all rows with the string "Hyde Park" in them and save them into a new file called `permits_hydepark.csv`. (consider using `grep` and the `>` operator)
 
-Add this script to git by using the commands above (`git add`/`git commit`) but with different arguments. 
+Add this script to git by using the commands above (`git add`/`git commit`) but with different arguments.
 
 
 ## Part 3. Python scripting
