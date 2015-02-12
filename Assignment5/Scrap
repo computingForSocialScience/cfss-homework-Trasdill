@@ -1,0 +1,17 @@
+def get_members(url):
+    # modified code from Tuesday Jan 20 lecture
+    req = grequests.get(url)
+    result_list =  grequests.map([req])
+    src = result_list[0].text
+    soup = BeautifulSoup(src)
+    rows = soup.select('tr')
+    members = []
+
+
+import requests
+
+def make_bill_API_URL(bill_id):
+    apikey = '01095d1e47624bb396249d94ad329f28'
+    true_id = bill_id[0:2]+'%20'+bill_id[2:]
+    url = 'http://openstates.org/api/v1/bills/il/98th/'+true_id+'?apikey='+apikey
+    return url

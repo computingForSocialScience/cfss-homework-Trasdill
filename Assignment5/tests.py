@@ -15,7 +15,7 @@ def testFetchArtistInfo():
     assert fetchArtistInfo('6UE7nl9mha6s8z0wFQFIZ2')['genres'] == [u'europop']
 
 def testFetchAlbums():
-    assert len(fetchAlbumIds('57anmI1X2hXWPrNagFdzZr')) == 10
+    assert len(fetchAlbumIds('57anmI1X2hXWPrNagFdzZr')) == 9
 
 def testFetchAlbumInfo():
     albumInfo = fetchAlbumInfo('24geHauG3JIbpyf9CRiuvf')
@@ -26,11 +26,11 @@ def testWriteArtistsInfo():
     artistId1 = fetchArtistId('earth wind fire')
     artistId2 = fetchArtistId('patsy cline')
     artistId3 = fetchArtistId('五月天')
-   
+
     assert artistId1=='4QQgXkCYTt3BlENzhyNETg'
     assert artistId2=='7dNsHhGeGU5MV01r06O8gK'
     assert artistId3=='16s0YTFcyjP4kgFwt7ktrY'
- 
+
     albumIds1 = fetchAlbumIds(artistId1)
     albumIds2 = fetchAlbumIds(artistId2)
     albumIds3 = fetchAlbumIds(artistId3)
@@ -46,7 +46,7 @@ def testWriteArtistsInfo():
     artistInfo1 = fetchArtistInfo(artistId1)
     artistInfo2 = fetchArtistInfo(artistId2)
     artistInfo3 = fetchArtistInfo(artistId3)
-    
+
     albumInfoList = []
     for albumId in albumIds1:
         albumInfoList.append(fetchAlbumInfo(albumId))
@@ -54,7 +54,7 @@ def testWriteArtistsInfo():
         albumInfoList.append(fetchAlbumInfo(albumId))
     for albumId in albumIds3:
         albumInfoList.append(fetchAlbumInfo(albumId))
-    
+
     writeArtistsTable([artistInfo1, artistInfo2, artistInfo3])
     writeAlbumsTable(albumInfoList)
 
