@@ -28,5 +28,5 @@ def fetchArtistInfo(artist_id):
     return Artist_Info
 
 
-#print fetchArtistId('Snoop Dogg')
+print fetchArtistId('Avril Lavigne')
 #print fetchArtistInfo('7hJcb9fa4alzcOq3EaNPoG')

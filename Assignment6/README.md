@@ -4,7 +4,7 @@ In this assignment, you will be using the Spotify API's [related-artists](https:
 You will then combine two or more of these networks to map out the space of artists defined by their joint similarity to the root artists.
 Finally, you will write a function that creates a Spotify- (or Pandora-) like playlist of tracks related to the root artists.
 
-You will find it useful to incorporate some of the functions you wrote last week. 
+You will find it useful to incorporate some of the functions you wrote last week.
 
 ## Part I. Get related-artist networks
 Put all the functions you define in questions I.1 through I.4 in a file called `artistNetworks.py`.
@@ -16,7 +16,7 @@ The method returns a maximum of twenty related artists.
 
 For example, `getRelatedArtists('2mAFHYBasVVtMekMUkRO9g')` should return a list like `['4UEhWRcA8NyjX0xaGjYf19', '1X1aYKdWWVdWnduDyBSpdu']` (except probably much longer).
 
-### 2. Depth Searching 
+### 2. Depth Searching
 Next write a function called `getDepthEdges(artistID, depth)` that takes two arguments, an artist ID and an integer `depth`, and returns a list of tuples representing the (directed) pairs of related artists.
 This function should search `depth` iterations 'deep' into the network.
 So `getDepthEdges(artistId,1)` will find the root artist and all of their related artists, while `getDepthEdges(artistId,2)` will find the root artists, all of their related artists, and *then* the related artists of each of the first batch of related artists.
@@ -63,7 +63,7 @@ For directed networks, the degree can be broken up into "in-degree", or the numb
 In the case of our related-artists network, edges point from the artist in question to the that artist's related artists (those returned your `getRelatedArtists` function).
 
 Write a function called `degree(edgeList, in_or_out)` that takes two arguments: an edge list as returned by `readEdgeList`, and a string that is either `"in"` or `"out"`.
-This function should use the `value_counts()` method of Pandas data frame columns to return the in-degree or out-degree (as specified by the second argument `in_or_out`) for all nodes in a given edge list. 
+This function should use the `value_counts()` method of Pandas data frame columns to return the in-degree or out-degree (as specified by the second argument `in_or_out`) for all nodes in a given edge list.
 (Here we consider each directed edge to be pointed _from_ the node in the first column _towards_ the node in the second column.)
 
 (Note that `value_counts()` is a method on the data type `Series`, which is the Pandas data type for columns in a data frame. So you can't call `value_counts()` on a data frame directly. If your data frame is called `df` and the two columns are called `artist1` and `artist2`, try `df['artist1'].value_counts()`).
@@ -78,12 +78,12 @@ The returned data frame should have every row that either of the two input data 
 There is only so much network analysis that can be done using edge lists.
 Make a function named `pandasToNetworkX(edgeList)` that creates a NetworkX Digraph (directed graph) from of an edge list in a pandas data frame.
 
-Note: 
+Note:
  * The Pandas DataFrame method `.to_records()` will convert a data frame into a list-like object containing a tuple for each row.
  * Here is the [networkx webpage](http://networkx.github.io/documentation/networkx-1.9.1/) and the [networkx documentation](http://networkx.github.io/documentation/networkx-1.9.1/).
  * Make sure to put the line `import networkx as nx` at the top of your script to use the `networkx` methods (e.g. `nx.DiGraph()`).
  * See the [slides from Tuesday February 12th](http://cfss.uchicago.edu/slides/w6_d2_networks.pdf) for examples of using `networkx`.
- 
+
 ### 5. Picking a central node
 To create a Spotify-like playlist generator, we will need a method to pick a random node from a related-artists network that is biased toward picking more central nodes over those on the network's periphery.
 To this end, make a new function called `randomCentralNode(inputDiGraph)` that takes a NetworkX DiGraph as its only argument and returns a single node from that network.

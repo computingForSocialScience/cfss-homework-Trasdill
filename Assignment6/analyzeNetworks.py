@@ -44,7 +44,7 @@ def combineEdgeLists(edgeList1, edgeList2):
 
 
 def pandasToNetworkX(edgeList):
-    diGraph = nx.Graph()
+    diGraph = nx.DiGraph()
     edgeList = pd.DataFrame.to_records(edgeList, index = False)
     diGraph.add_edges_from(edgeList)
     return diGraph
@@ -65,14 +65,16 @@ def randomCentralNode(inputDiGraph):
 
 
 #For Testing the Functions
-edgeDogg = readEdgeList('Doggumentary')
-edgeLavigne = readEdgeList('The Best Damn Thing')
-graphDogg = pandasToNetworkX(edgeDogg)
-graphLavigne = pandasToNetworkX(edgeLavigne)
+#edgeDogg = readEdgeList('Doggumentary')
+#edgeLavigne = readEdgeList('The Best Damn Thing')
+#snoopLavigne = combineEdgeLists(edgeDogg, edgeLavigne)
+#graphDogg = pandasToNetworkX(edgeDogg)
+#graphLavigne = pandasToNetworkX(edgeLavigne)
 #print degree(edgeDogg,'in')
 #print degree(edgeDogg,'out')
 #print degree(edgeDogg,'stuff')
 #print combineEdgeLists(edgeDogg, edgeLavigne)
 #pandasToNetworkX(edgeDogg)
 #pandasToNetworkX(edgeLavigne)
-print randomCentralNode(graphDogg)
+#pandasToNetworkX(snoopLavigne)
+#print randomCentralNode(graphDogg)

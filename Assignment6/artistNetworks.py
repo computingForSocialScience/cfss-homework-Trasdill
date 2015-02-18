@@ -63,8 +63,11 @@ def writeEdgeList(artist_id, depth, filename):
 
 
 #for testing the functions
-snoop_dogg = '7hJcb9fa4alzcOq3EaNPoG'
+#snoop_dogg = '7hJcb9fa4alzcOq3EaNPoG'
+#avril_lavigne = '0p4nmQO2msCgU4IF37Wi3j'
 #print getRelatedArtists(snoop_dogg)
+#print getRelatedArtists(avril_lavigne)
 #print getDepthEdges(snoop_dogg, 2)
 #print getEdgeList(snoop_dogg, 2)
-writeEdgeList(snoop_dogg, 2, 'Doggumentary')
+#writeEdgeList(snoop_dogg, 2, 'Doggumentary')
+#writeEdgeList(avril_lavigne, 2, 'The Best Damn Thing')
