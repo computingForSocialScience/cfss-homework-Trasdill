@@ -1,0 +1,97 @@
+**Description of the Project**
+
+The present project aims at creating an interactive tool to establish an as robust as possible
+claim-specific citation networks in a given journal database. Using standardized network analysis
+methods from python, the tool would reliably accomplish the following steps:
+
+1)	Text-mine and parse, using keyword-based requests, a collection of journal article from the targeted database,
+with particular focus on one given scientific field.
+Parsing involves tagging the collected articles with the following criteria:
+a.	Year of publication
+b.	Substantive Nature (whether it is a Research Article, a Review, or another type of article)
+  ## May be the most complicated aspect of the project ##
+c.  Support (whether it supports or criticizes the claim at hand)
+  ## May be very complicated ##
+c.  Data about the Author
+d.  Data about the Journals (journal metrics)
+
+2)	Identify articles cited by the collected articles and assemble the compiled collection in a directed graph which:
+a.	Exposes strong and weak ties between articles
+b.	Highlights connections and nodes based on the metadata collected above
+c.	Identifies and highlights the most authoritative articles based on number of times cited.
+
+The method will involve a specific database (in this case, ScienceDirect), but should present enough
+methodological robustness to be used as template or foundation for use with other databases and/or APIs.
+The end result is not expected to construct a definitive citation network for a given claim
+(such a task is presently unfeasible), but to provide a reliable, pertinent basis which could be refined into a more authoritative one.
+
+
+
+**Purpose of the Project**
+
+The foundational goal of this project (exploring standardized methods for assembling claim-specific citation networks)
+weaves itself into the broader question of using citation networks as tools for the sociological analysis of a claim.
+The purpose behind standardizing citation-network-building tools and methods is to allow comparative analysis of a variety of citation networks
+in different contexts and scales. Thus, a detailed, in-depth study of the patterns of citations as reflection of the diffusion and
+acceptance/rejection of claims and as function of the context/robustness of a claim would be possible. Such an analysis will be carried outin my thesis.
+
+This project must therefore be considered as a proof of principle, which lays the groundwork for more developed computerized
+citation network analysis using python capabilities and drawing from a large and diverse database of scientific journals
+and articles. Rather than actual research and interpretation, the end goal is to understand how to reliably scrape and narrow
+down a selection of articles based on relevant keywords, with the aim of constructing relevant claim-based citation-networks
+on which further analysis can be carried out. By design, the project tools cannot be used to carry out analysis. Further
+interpretation will be needed by the user to isolate most relevant articles to the user’s purpose. Likewise, copyright issues
+and the mass of data involved implies the user may need to access and further analyze the content of articles independently of the tools.
+As said above, the tools explored here are meant as the foundation for meta-analytical citation-network research, not to return
+substantive conclusions themselves, and are meant as an experimental step to produce, in the future, more developed and reliable
+versions which could return more definitive results.
+
+
+
+**Computational Steps**
+
+The present project aims to exploit network-analysis tools present in python (in particular the NetworkX library) to analyze articles
+in the ScienceDirect database. All methods of data collection described below will invoke the free-access API tools for ScienceDirect
+developed by Elsevier (ScienceDirect Search for articles, and SCOPUS for citations, see: http://dev.elsevier.com/). These tools propose specific API operations
+for article collection, text collection and metadata collection, including detailed info such as article abstracts or citation lists,
+which allow us to easily query for relevant citations and filter out articles based on claims. Operations are constructed as GET requests
+(like the Spotify or OpenStates APIs) and return data either in plain text or XML format depending on preference (I will most likely use XML for ease of
+analysis in-code).
+
+The end result of the project is a script which takes an undetermined number of keywords AND a depth integer “N” as arguments
+and returns a citation network constructed from relevant articles and their relevant citations to the Nth degree.
+
+
+Tentative (and incomplete) list of computational steps involve:
+
+•	Scanning database for relevant articles based on a selection of keywords
+o	Retrieving their DOI or PII (Elsevier proprietary ID system)
+
+•	Scanning for Metadata on these articles and storing them in a dictionary/file, including (but not limited to)
+o	Extracting the abstracts of the articles and key-word searching them to tag them as "research", "review" or "other"
+## May be the most complicated aspect of the project ##
+o	Identifying the supportive nature of the article from the abstract ## may be very complicated ##
+o	Extracting Author data
+o	Extracting Year of Publication
+o	Extracting citation list
+o	Extracting Journal Info
+
+
+•	Scanning for related articles through citations search
+o	Extracting the abstracts of the cited articles and selecting or rejecting articles by pertinence based on the input keywords
+## May be a complicated aspect of the project ##
+o	Scanning for related articles to that selection, to an n-depth specified by the user
+o	Collecting metadata as above for the complete compilation of articles
+
+From there, a series of purpose-specific graphs and charts will be displayed on the final webpage, including, but not limitied to
+(within the limits of feasibility):
+
+•	A DiGraph of the citation Network, with (if possible) color or text tags indicating the substantive and supportive nature of an article
+•	A Chart of proportion of research articles to non-research articles
+•	A timeline of published articles each year on the topic
+•	An interactive list of articles included in the network, with display on demand of their info, citation list and abstract.
+•	A list of involved journals in the citation network, with display on demand of their info (notably impact factor)
+
+The above computational steps will be invoked for two (possibly three) claims, and their results will be preloaded from dedicated files
+(to avoid pinging the database each time the webpage is loaded or reloaded) and displayed in dedicated pages.
+Each claim will carry a brief explanation as to how it's relevant keywords were selected. Users will be allowed to input their own claims on a separate page.
