@@ -1,0 +1,19 @@
+<html>
+<head>
+  <title> Playlists </title>
+</head>
+<body>
+
+  <ul id="playlists">
+    {% for Id,rootArtist in playlists %}
+
+      <li> <a href="/playlist/{{Id}}"> "{{Id}}. {{rootArtist}}" </li>
+
+    {% endfor %}
+  </ul>
+
+
+
+
+</body>
+</html>
