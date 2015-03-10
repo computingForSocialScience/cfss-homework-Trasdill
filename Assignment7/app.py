@@ -42,6 +42,12 @@ def make_playlists_resp():
 
 @app.route('/playlist/<playlistId>')
 def make_playlist_resp(playlistId):
+    cur = db.cursor()
+    sql = """SELECT songOrder, artistName, albumName, trackName FROM songs WHERE playlistId = '%s' """ % (playlistId)
+    cur.execute(sql)
+    songs = []
+    for song in cur.fetchall():
+        songs.append(song)
     return render_template('playlist.html',songs=songs)
 
 
@@ -53,7 +59,7 @@ def add_playlist():
     elif request.method == 'POST':
         # this code executes when someone fills out the form
         artistName = request.form['artistName']
-        # YOUR CODE HERE
+        createNewPlaylist(artistName)
         return(redirect("/playlists/"))
 
 
@@ -70,7 +76,6 @@ def createNewPlaylist(name):
 
     root_id_select = """SELECT Id FROM playlists WHERE rootArtist = '%s' """ % (artist)
     cur.execute(root_id_select)
-#    playlist_id = cur.execute(root_id_select)
     for id in cur.fetchone():
         playlist_id = id
     db.commit()
@@ -93,7 +98,6 @@ def createNewPlaylist(name):
     for artist_id in playlist_ids:
         tracks_list = []
         album_list = fetchAlbumIds(artist_id)
-        #print album_list
         random_album = random.choice(album_list)
 
 
@@ -122,7 +126,6 @@ def createNewPlaylist(name):
         data = req.json()
         track_name = '"' + data['name'] + '"'
         track_name = track_name.replace("'",'')
-        #print artist_name, album_name, track_name
 
 
 
@@ -132,12 +135,13 @@ def createNewPlaylist(name):
         order = order +1
 
 
-
+# XXX test - mcc
 #createNewPlaylist('Snoop Dogg')
 #createNewPlaylist('Avril Lavigne')
 #createNewPlaylist('Charlie Parker')
 #createNewPlaylist('Orson')
 #createNewPlaylist('AC/DC')
+#createNewPlaylist('50 Cents')
 if __name__ == '__main__':
     app.debug=True
     app.run()

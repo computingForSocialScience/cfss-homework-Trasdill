@@ -1,0 +1,32 @@
+<html>
+<head>
+  <title> Songs </title>
+</head>
+<body>
+
+  <table>
+    <tr>
+      <th> Order </th>
+      <th> Artist </th>
+      <th> Album </th>
+      <th> Track </th>
+    </tr>
+
+
+  {% for songOrder,artistName,albumName,trackName in songs %}
+
+    <tr>
+
+      <td> {{songOrder}} </td>
+      <td> {{artistName}} </td>
+      <td> {{albumName}} </td>
+      <td> {{trackName}} </td>
+
+    </tr>
+
+  {% endfor %}
+    <tr><td colspan=5 style='text-align:center;vertical-align:middle'>...</td></tr>
+  </table>
+
+</body>
+</html>

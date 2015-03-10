@@ -4,15 +4,18 @@
 </head>
 <body>
 
-  <ul id="playlists">
-    {% for Id,rootArtist in playlists %}
 
-      <li> <a href="/playlist/{{Id}}"> "{{Id}}. {{rootArtist}}" </li>
+  <table>
+  <tr><th>id</th><th>rootArtist</th></tr>
 
-    {% endfor %}
-  </ul>
+  {% for Id,rootArtist in playlists %}
 
+  <tr><td>{{Id}}.</td><td><a href="/playlist/{{Id}}"> "{{rootArtist}}" </a></td></tr>
 
+  {% endfor %}
+
+  <tr><td colspan=2 style='text-align:center;vertical-align:middle'>...</td></tr>
+  </table>
 
 
 </body>
