@@ -76,8 +76,8 @@ def createNewPlaylist(name):
 
     root_id_select = """SELECT Id FROM playlists WHERE rootArtist = '%s' """ % (artist)
     cur.execute(root_id_select)
-    for id in cur.fetchone():
-        playlist_id = id
+    for item in cur.fetchone():
+        playlist_id = item
     db.commit()
 
     artist_id = fetchArtistId(name)
@@ -129,7 +129,7 @@ def createNewPlaylist(name):
 
 
 
-        songs_insert = """INSERT INTO songs (playlistId, songOrder, artistName, albumName, trackName) VALUES ('%s', '%s', '%s', '%s', '%s')""" % (playlist_id, order, artist_name, album_name, track_name)
+        songs_insert = """INSERT INTO songs (playlistId, songOrder, artistName, albumName, trackName) VALUES ('%s', '%s', '%s', '%s', '%s');""" % (playlist_id, order, artist_name, album_name, track_name)
         cur.execute(songs_insert)
         db.commit()
         order = order +1
