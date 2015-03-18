@@ -1,0 +1,24 @@
+<html>
+<head><title>Stirring...</title></head>
+<body style="background-color: #FFD685">
+
+  <table width=100% height=10%>
+    <tr>
+      <td style="text-align: center; vertical-align: middle;">
+        <a href='/'><img src= {{ url_for('static', filename='Onion Soup.png') }} alt='Onion Soup'></img><a>
+      </td>
+    </tr>
+  </table>
+<h2 style="text-align: center">Primary Articles Collected</h2>
+  <table>
+
+  {% for Id in articles %}
+
+  <tr><td>{{Id}}.</td><td><a href="/broth/{{Id}}"> "{{articles[Id]['TITLE']}}" </a></td></tr>
+
+  {% endfor %}
+
+  </table>
+
+</body>
+</html>

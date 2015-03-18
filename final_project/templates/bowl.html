@@ -1,0 +1,24 @@
+<html>
+<head><title>Your Soup is Hot!</title></head>
+<body style="background-color: #FFD685">
+
+  <table width=100% height=10%>
+    <tr>
+      <td style="text-align: center; vertical-align: middle;">
+        <a href='/'><img src= {{ url_for('static', filename='Onion Soup.png') }} alt='Onion Soup'></img><a>
+      </td>
+    </tr>
+  </table>
+  <h2 style=text-align:center>Results for {{arguments}}</h2>
+
+  <table>
+    <div style="text-align:center">
+        <p><a href="/broth/"><h3>Explore Raw Data</h3></a></p>
+        <p>
+          <a href="/croutons/"><h3>See Graphic Information</h3></a>
+        </p>
+    </div>
+  </table>
+
+</body>
+</html>

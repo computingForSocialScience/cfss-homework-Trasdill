@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <title>Album list</title>
+</head>
+<body>
+    <form action="" method="post">
+        <label>
+            Album name:
+            <input type=text name=albumName>
+        </label><br>
+        <label>
+            Album year:
+            <input type=text name=albumYear>
+        </label><br>
+        <input type=submit value="Add album">
+    </form>
+    <table>   
+        <tr>
+            <th>Album</th><th>Year</th>
+        </tr> 
+    {% for album,year in albumList %}
+        <tr>
+            <td>{{ album }}</td>
+            <td>{{ year }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+</body>
+</html>

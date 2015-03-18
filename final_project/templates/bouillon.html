@@ -1,0 +1,101 @@
+<html>
+<head><title>{{main_article['TITLE']}}</title></head>
+<body style="background-color: #FFD685">
+
+  <table width=100% height=10%>
+    <tr>
+      <td style="text-align: center; vertical-align: middle;">
+        <a href='/'><img src= {{ url_for('static', filename='Onion Soup.png') }} alt='Onion Soup'></img><a>
+      </td>
+    </tr>
+  </table>
+
+<h2 style="text-align:center">{{main_article['TITLE']}}</h2>
+
+<p> ABSTRACT: </p><p> {{main_article['DESCRIPTION']}} </p>
+
+
+<ul>
+
+  {% for citation, weburl in article_data %}
+  <p style="text-align:right">_____________________________________________________</p>
+
+  <div>Get Full Text Here:<a href="{{ ''.join(['http://', weburl]) }}"> {{weburl}} </a><div style="text-align:right">
+    This article has been cited {{citation}} times in SCOPUS.</div></div>
+
+
+  {% endfor %}
+  <p></p>
+
+  <li> <u>The following references are freely available for this article:</u>
+    <table>
+
+    {% for item in ref_articles %}
+    <tr>
+    {% if not ref_articles[item]['TITLE'] == None %}
+
+    <p>
+    {% for id, citation, weburl in reference_data %}
+    {% if item == ref_identifier[id] %}
+    {{ref_articles[item]['TITLE']}}
+    (Cited {{citation}} times in SCOPUS):
+    <div style="text-indent: 50px">Get Here:
+      <a href="{{ ''.join(['http://', weburl]) }}">
+        {{weburl}}
+      </a>
+    </div>
+    {% endif %}
+    {% endfor %}
+    </p>
+
+    {% endif %}
+    </tr>
+    {% endfor %}
+
+
+    </table>
+  </li>
+
+  <li> <u>The following references are freely available via external link:</u>
+    <table>
+
+    <tr>
+
+    <p>
+    {% for id, citation, weburl in reference_data %}
+    {% if 'doi' in weburl %}
+    <div style="text-indent: 50px">
+      <a href="{{ ''.join(['http://', weburl]) }}">
+        {{weburl}}
+      </a>
+      (Cited {{citation}} times in SCOPUS)
+    </div>
+    {% endif %}
+    {% endfor %}
+    </p>
+
+    </tr>
+
+
+    </table>
+  </li>
+
+  <li> <u>The following articles were also recommended:</u>
+    <table>
+      <tr>
+      {% for id, citation, weburl in recommendation_data %}
+
+      <p>
+        {{rec_articles[rec_identifier[id]]['TITLE']}}
+        (Cited {{citation}} times in SCOPUS)
+        <div style="text-indent: 50px">Get Here:
+          <a href="{{ ''.join(['http://', weburl]) }}">
+            {{weburl}}
+          </a>
+        </div>
+      </p>
+
+      {% endfor %}
+    </table>
+  </li>
+</ul>
