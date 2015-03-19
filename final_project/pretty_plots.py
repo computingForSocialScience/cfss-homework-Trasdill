@@ -40,16 +40,13 @@ def author_table(): #Table
     author_list =  []
     c.execute(get_main_authors)
     for author in c:
-        curated = str(author)[3:-3]
-        main_authors.append(curated)
+        main_authors.append(author[0])
     c.execute(get_reference_authors)
     for author in c:
-        curated = str(author)[3:-3]
-        reference_authors.append(curated)
+        reference_authors.append(author[0])
     c.execute(get_recommendation_authors)
     for author in c:
-        curated = str(author)[3:-3]
-        recommendation_authors.append(curated)
+        recommendation_authors.append(author[0])
 
     author_list =  main_authors + reference_authors + reference_authors
 
@@ -79,16 +76,13 @@ def journal_table(): #HBar Chart
     journal_list = []
     c.execute(get_main_journals)
     for journal in c:
-        curated = str(journal)[3:-3]
-        main_journals.append(curated)
+        main_journals.append(journal[0])
     c.execute(get_reference_journal)
     for journal in c:
-        curated = str(journal)[3:-3]
-        reference_journals.append(curated)
+        reference_journals.append(journal[0])
     c.execute(get_recommendation_journal)
     for journal in c:
-        curated = str(journal)[3:-3]
-        recommendation_journals.append(curated)
+        recommendation_journals.append(journal[0])
 
 
     journal_list = main_journals + reference_journals + recommendation_journals
@@ -108,11 +102,14 @@ def journal_table(): #HBar Chart
     jyvals = []
     for x in jxvals:
         jyvals.append(journals_dict[x])
+
+    index = range(0, len(journals_dict)*2, 2)
+
     plt.barh(range(len(journals_dict)), jyvals, align='center', color='#CC0000')
     plt.yticks(range(len(journals_dict)), jxvals)
     plt.xlabel('Frequency')
     plt.ylabel('Journals')
-    plt.title('Frequency of Appearance for Journals')
+    plt.axis('scaled')
     plt.savefig('static/journals.png', bbox_inches='tight')
     plt.clf()
     plt.close()
@@ -125,8 +122,7 @@ def availability(): #Pie Chart
     c.execute(get_references_count)
     ref_list = []
     for status in c:
-        curate = str(status)[3:-3]
-        ref_list.append(curate)
+        ref_list.append(status[0])
 
     available = 0
     partly = 0
@@ -150,7 +146,6 @@ def availability(): #Pie Chart
     explode = (0.1, 0, 0)
     plt.pie(sizes, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=90)
     plt.axis('equal')
-    plt.title('General Availability of Collected References')
     plt.savefig('static/availability.png', bbox_inches='tight')
     plt.clf()
     plt.close()
@@ -172,36 +167,38 @@ def year_chart(): #Bar Chart
 
     c.execute(get_main_years)
     for year in c:
-        curated = str(year)[3:-3]
-        main_years.append(curated)
+        main_years.append(int(year[0]))
     c.execute(get_reference_years)
     for year in c:
-        curated = str(year)[3:-3]
-        reference_years.append(curated)
+        reference_years.append(int(year[0]))
     c.execute(get_recommendation_years)
     for year in c:
-        curated = str(year)[3:-3]
-        recommendation_years.append(curated)
+        recommendation_years.append(int(year[0]))
 
     all_years =  main_years + reference_years + recommendation_years
 
-    years_list = ['N/A' if year == '' else year for year in all_years]
+    #years_list = ['N/A' if year == '' else year for year in all_years]
+    while '' in all_years:
+        all_years.remove('')
+    while 'N/A' in all_years:
+        all_years.remove('N/A')
 
-    for year in years_list:
-        if year in years_dict:
-            years_dict[year] += 1
-        else:
-            years_dict[year] = 1
 
-    yxvals = sorted(years_dict.keys(), key=int)
-    yyvals = []
-    for x in yxvals:
-        yyvals.append(years_dict[x])
-    plt.bar(range(len(years_dict)), yyvals, align='center', color='m')
-    plt.xticks(range(len(years_dict)), yxvals)
+    #for year in years_list:
+    #    if year in years_dict:
+    #        years_dict[year] += 1
+    #    else:
+    #        years_dict[year] = 1
+
+    #yxvals = sorted(years_dict.keys(), key=int)
+    #yyvals = []
+    #for x in yxvals:
+    #    yyvals.append(years_dict[x])
+    #plt.bar(range(len(years_dict)), yyvals, align='center', color='m')
+    #plt.xticks(range(len(years_dict)), yxvals)
+    plt.hist(all_years, bins=10)
     plt.xlabel('Year of Publication')
     plt.ylabel('Frequency')
-    plt.title('Years of Publication for All Available Articles')
     plt.savefig('static/year_chart.png', bbox_inches='tight')
     plt.clf()
     plt.close()
@@ -221,16 +218,13 @@ def category_chart(): #HBar Chart
     categories_list = []
     c.execute(get_article_categories)
     for category in c:
-        curated = str(category)[3:-3]
-        main_categories.append(curated)
+        main_categories.append(category[0])
     c.execute(get_reference_categories)
     for category in c:
-        curated = str(category)[3:-3]
-        reference_categories.append(curated)
+        reference_categories.append(category[0])
     c.execute(get_recommendation_categories)
     for category in c:
-        curated = str(category)[3:-3]
-        recommendation_categories.append(curated)
+        recommendation_categories.append(category[0])
 
     categories_list = main_categories + reference_categories + recommendation_categories
 
@@ -244,12 +238,12 @@ def category_chart(): #HBar Chart
     cyvals = []
     for x in cxvals:
         cyvals.append(categories_dict[x])
+
+
     plt.barh(range(len(categories_dict)), cyvals, align='center')
     plt.yticks(range(len(categories_dict)), cxvals)
     plt.xlabel('Frequency')
     plt.ylabel('Categories')
-    plt.title('Article Categories for All Directly Available Articles')
-    #plt.show()
     plt.savefig('static/categories.png', bbox_inches='tight')
     plt.clf()
     plt.close()
@@ -268,16 +262,13 @@ def available_counts(): #Stacked Histogram
     all_counts =  []
     c.execute(get_main_counts)
     for count in c:
-        curated = str(count)[3:-3]
-        main_counts.append(curated)
+        main_counts.append(count[0])
     c.execute(get_reference_counts)
     for count in c:
-        curated = str(count)[3:-3]
-        reference_counts.append(curated)
+        reference_counts.append(count[0])
     c.execute(get_recommendation_counts)
     for count in c:
-        curated = str(count)[3:-3]
-        recommendation_counts.append(curated)
+        recommendation_counts.append(count[0])
 
     all_counts =  main_counts + reference_counts + recommendation_counts
 
@@ -286,11 +277,11 @@ def available_counts(): #Stacked Histogram
     while 'N/A' in all_counts:
         all_counts.remove('N/A')
 
-    xvals = []
+    count_list = []
     for count in all_counts:
-        xvals.append(int(count))
+        count_list.append(int(count))
 
-    return xvals
+    return count_list
 
 
 def partly_available_counts(): #Stacked Histogram
@@ -302,8 +293,7 @@ def partly_available_counts(): #Stacked Histogram
 
     c.execute(get_reference_counts)
     for count in c:
-        curated = str(count)[3:-3]
-        reference_counts.append(curated)
+        reference_counts.append(count[0])
 
     while '' in reference_counts:
         reference_counts.remove('')
@@ -326,8 +316,7 @@ def unavailable_counts(): #Stacked Histogram
 
     c.execute(get_reference_counts)
     for count in c:
-        curated = str(count)[3:-3]
-        reference_counts.append(curated)
+        reference_counts.append(count[0])
 
     while '' in reference_counts:
         reference_counts.remove('')
@@ -352,10 +341,85 @@ def counts_histogram():
     plt.hist([available, partly_available, unavailable], label=alabels, bins=5)
     plt.xlabel('Number of Times Cited')
     plt.ylabel('Frequency')
-    plt.title('Citation Counts for All Articles by Availability')
     plt.legend()
     #plt.show()
     plt.savefig('static/citation_counts.png', bbox_inches='tight')
     plt.clf()
     plt.cla()
     plt.close()
+
+
+def article_repeats():
+
+    g = open('references.json', 'r')
+    ref_load = json.load(g)
+    g.close()
+
+    h = open('recommendations.json', 'r')
+    rec_load = json.load(h)
+    h.close()
+
+
+    get_main_piis = """SELECT Pii from article_data"""
+    get_reference_piis = """SELECT Pii from reference_data WHERE Status='Available via Elsevier'"""
+    get_recommendation_piis = """SELECT Pii from recommended_articles"""
+
+    piis_dict = {}
+    main_piis = []
+    reference_piis = []
+    recommendation_piis = []
+    all_piis =  []
+    c.execute(get_main_piis)
+    for pii in c:
+        main_piis.append(pii[0])
+    c.execute(get_reference_piis)
+    for pii in c:
+        reference_piis.append(pii[0])
+    c.execute(get_recommendation_piis)
+    for pii in c:
+        recommendation_piis.append(pii[0])
+
+    while '' in reference_piis:
+        reference_piis.remove('')
+    while 'N/A' in reference_piis:
+        reference_piis.remove('N/A')
+
+    all_piis =  main_piis + reference_piis + recommendation_piis
+
+    piis_list = []
+    for pii in all_piis:
+        piis_list.append(pii)
+
+    for pii in piis_list:
+        if pii in piis_dict:
+            piis_dict[pii] += 1
+        else:
+            piis_dict[pii] = 1
+
+    get_reference_data = """SELECT citing_id, article_id, weburl from reference_data WHERE Pii=%s"""
+    get_recommendation_data = """SELECT citing_id, article_id, weburl from recommended_articles WHERE Pii=%s"""
+
+    double = {}
+    culprits = []
+    total = 0
+    for pii in piis_dict:
+        if piis_dict[pii]>1:
+            total +=1
+            double['marker'] = total
+            double['count'] = piis_dict[pii]
+            if c.execute(get_reference_data, pii) == True:
+                data = c.fetchone()
+                cit_id = unicode(data[0])
+                ref_id = unicode(data[1])
+                double['title'] = ref_load[cit_id][ref_id][u'TITLE']
+                double['weburl'] = data[2]
+            elif c.execute(get_recommendation_data, pii) == True:
+                data = c.fetchone()
+                cit_id = unicode(data[0])
+                ref_id = unicode(data[1])
+                double['title'] = rec_load[cit_id][ref_id]['TITLE']
+                double['weburl'] = data[2]
+            culprits.append(double)
+
+
+    return culprits, total

@@ -41,12 +41,10 @@ def get_article_info(pii):
 
             for name in name_data:
                 author = name["$"]
-                #author = author.replace("'","")
                 authors.append(author)
 
         else:
             author = name_data
-            #author = author.replace("'","")
             authors.append(author)
 
         weburl = str(get_info["link"][1]["@href"])[7:]
@@ -99,16 +97,9 @@ def get_article_info(pii):
             description = get_info["dc:description"]
             description = description.replace("'","")
 
-        if "originalText" not in get_data:
-            full_text = None
-
-        else:
-            full_text = get_data["originalText"]
-            full_text = full_text.replace("'","")
-
 
         article_data = {"AUTHORS":authors,"YEAR":year,"TITLE":title, "CATEGORY": category, "PUBLICATION":publication,"TYPE":publication_type,"VOLUME":volume,"NUMBER":number,"PAGES":pages,
-        "DESCRIPTION":description,"PII":pii, "WEBURL":weburl, "FULL_TEXT":full_text}
+        "DESCRIPTION":description,"PII":pii, "WEBURL":weburl}
 
     return article_data
 

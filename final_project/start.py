@@ -17,17 +17,17 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def present():
+def kitchen():
     # this function just renders templates/index.html when
     # someone goes to http://127.0.0.1:5000/
-    return(render_template('index.html'))
+    return(render_template('kitchen.html'))
 
 
-@app.route('/kitchen/',methods=['GET','POST'])
+@app.route('/pot/',methods=['GET','POST'])
 def cook():
     if request.method == 'GET':
 
-        return(render_template('kitchen.html'))
+        return(render_template('pot.html'))
     elif request.method == 'POST':
 
         key_words = request.form['keyWords']
@@ -42,7 +42,8 @@ def serve():
     c = db.cursor()
     sql = """SELECT Key_Words FROM keywords"""
     c.execute(sql)
-    arguments = str(c.fetchone())[3:-3]
+    arguments = c.fetchone()
+    arguments = arguments[0]
 
     return render_template('bowl.html', arguments=arguments)
 
@@ -51,8 +52,9 @@ def serve():
 def stir():
     f = open('articles.json', 'r')
     loading = json.load(f)
+    keys = sorted(loading.keys(), key=int)
 
-    return(render_template('broth.html', articles=loading))
+    return(render_template('broth.html', articles=loading, keys=keys))
 
 
 @app.route('/broth/<articleId>')
@@ -111,10 +113,16 @@ def bread():
     year_chart()
     category_chart()
     counts_histogram()
+    repeats = article_repeats()
 
-    return(render_template('croutons.html', authors=authors))
-    #, journals=journals, availability=availability, year_chart=year_chart, category_chart=category_chart, counts_histogram=counts_histogram
+    return(render_template('croutons.html', authors=authors, repeats=repeats))
 
+
+@app.route('/recipe/')
+def recipe():
+    # this function just renders templates/index.html when
+    # someone goes to http://127.0.0.1:5000/
+    return(render_template('recipe.html'))
 
 
 

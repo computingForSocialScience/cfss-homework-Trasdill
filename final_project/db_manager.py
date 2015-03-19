@@ -96,7 +96,7 @@ def articles_to_json(info_dict):
         return
 
     else:
-        data = {"TITLE":info_dict["TITLE"], "DESCRIPTION":info_dict["DESCRIPTION"], "FULL_TEXT":info_dict["FULL_TEXT"]}
+        data = {"TITLE":info_dict["TITLE"], "DESCRIPTION":info_dict["DESCRIPTION"], "PII":info_dict["PII"]}
 
         return data
 
@@ -107,7 +107,7 @@ def references_to_json(info_dict):
         return
 
     else:
-        data = {"TITLE":info_dict["TITLE"], "DESCRIPTION":info_dict["DESCRIPTION"], "FULL_TEXT":info_dict["FULL_TEXT"]}
+        data = {"TITLE":info_dict["TITLE"], "DESCRIPTION":info_dict["DESCRIPTION"], "PII":info_dict["PII"]}
 
         return data
 
@@ -118,7 +118,7 @@ def recommendations_to_json(info_dict):
         return
 
     else:
-        #data = {"TITLE":info_dict["TITLE"], "DESCRIPTION":info_dict["DESCRIPTION"], "FULL_TEXT":info_dict["FULL_TEXT"]}
-        data = {"TITLE":info_dict["TITLE"]}
+        data = {"TITLE":info_dict["TITLE"], "DESCRIPTION":info_dict["DESCRIPTION"], "PII":info_dict["PII"]}
+        #data = {"TITLE":info_dict["TITLE"]}
 
         return data

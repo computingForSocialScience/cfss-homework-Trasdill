@@ -1,58 +1,32 @@
 <html>
-<head><title>Make a New Soup</title></head>
+<head><title>Welcome to Onion Soup</title></head>
 <body style="background-color: #FFD685">
 
-<table width=100% height=10%>
-  <tr>
-    <td style="text-align: center; vertical-align: middle;">
-      <a href='/'><img src= {{ url_for('static', filename='Onion Soup.png') }} alt='Onion Soup'></img><a>
-    </td>
-  </tr>
-</table>
-
-        <h3 style=text-align:center>Enter Key Words and Size to create data</h3>
-        <form action="" method="post">
-            <p style=text-align:center><label>
-                Key Words:
-                <input type=text name=keyWords>
-            </label></p>
-            <p style=text-align:center><label>
-                Number of Primary Articles:
-                <select name=inputSize>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="20">20</option>
-                  <option value="30">30</option>
-                  <option value="40">40</option>
-                  <option value="50">50</option>
-                  <option value="60">60</option>
-                  <option value="70">70</option>
-                  <option value="80">80</option>
-                  <option value="90">90</option>
-                  <option value="100">100</option>
-                  <option value="110">110</option>
-                  <option value="120">120</option>
-                  <option value="130">130</option>
-                  <option value="140">140</option>
-                  <option value="150">150</option>
-                  <option value="160">160</option>
-                  <option value="170">170</option>
-                  <option value="180">180</option>
-                  <option value="190">190</option>
-                  <option value="200">200</option>
-                </select>
-            </label>
-            <p style=size:5px;text-align:center>
-                (Warning: a soup with 200 articles may take over an hour to cook.)
-            </p>
-            </p>
-            <p style=text-align:center><input type=submit value="Cook It!"></p>
-        </form>
+  <h2 style=text-align:center>Welcome to</h2>
+  <table width=100% height=10%>
+    <tr>
+      <td style="text-align: center; vertical-align: middle;">
+        <a href='/'><img src= {{ url_for('static', filename='Onion Soup.png') }} alt='Onion Soup'></img><a>
+      </td>
+    </tr>
+  </table>
+  <div style="text-align:center">
+      <p><a href="/bowl/"><h3>View existing data</h3></a></p>
+      <p><a href="/pot/"><h3>Create new dataset</h3></a><p><h5>(Warning: this will erase previously existing data)</h5></p></p>
+  </div>
 
 
+
+
+            <div style="text-align:center; bottom: 200px; text-justify:inter-word">
+            <p>Onion Soup is a web application designed to collect, parse and plot article information from the Elsevier ScienceDirect database.
+            It is designed to analyse the characteristics of the topical scientific sources immediately available to a university student with no specific clearance or entitlement to the Elsevier database.
+            This application therefore allows to observe and analyse what a typical student seeking to inform him or herself is likely to be provided via elsevier.
+            For any input field of research, Onion Soup collects a selection of available articles based on the ScienceDirect search engine as well as any available reference or suggested articles.
+            It returns their metadata raw as well as in a series of relevant plots and graph.</p>
+            <p><a href="/recipe/"><h3>Notes on the App</h3></a></p>
+
+            </div>
 
 </body>
 </html>

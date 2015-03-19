@@ -17,13 +17,12 @@ import time
 def scrape_webpage(url):
 
     all_data = {}
-    #wd = webdriver.Firefox()
     wd = webdriver.PhantomJS("C:/phantomjs-2.0.0-windows/bin/phantomjs.exe")
     wd.maximize_window()
     wd.get(url)
     time.sleep(2)
     wd.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-    time.sleep(5)
+    time.sleep(2)
 
     html_source = wd.page_source
     soup = bs(html_source)
@@ -46,7 +45,6 @@ def scrape_webpage(url):
         recommend.append(rec_pii)
 
     all_data = {"CITATION_COUNT":citation_count, "REFERENCES":ref_rows, "RECOMMENDATIONS":recommend}
-    #all_data = {"CITATION_COUNT":citation_count, "RECOMMENDATIONS":recommend}
 
     return all_data
 
@@ -68,7 +66,6 @@ def reference_soup(soup):
         volume = "N/A"
         number = "N/A"
         pages = "N/A"
-        full_text = None
         description = None
         weburl = "N/A"
         citation_count = "N/A"
@@ -82,11 +79,9 @@ def reference_soup(soup):
 
         else:
             citation_text = citation_tag.get_text()
-            #print citation_text
             citation_count = str(citation_text)[17:]
             #citation_count = citation_count.replace("(","")
             citation_count = citation_count.replace(")","")
-            #print citation_count
 
         link_tag = link_row.find("a", class_= "cLink")
 
@@ -104,13 +99,11 @@ def reference_soup(soup):
                 volume = "N/A"
                 number = "N/A"
                 pages = "N/A"
-                full_text = None
                 description = None
                 weburl = "N/A"
                 category = "N/A"
 
             else:
-                #cross_tag = crossref.find_parents("a")
                 weburl = str(crossref["href"])[7:]
                 status = "Available via external Link"
                 authors = ["N/A"]
@@ -121,7 +114,6 @@ def reference_soup(soup):
                 volume = "N/A"
                 number = "N/A"
                 pages = "N/A"
-                full_text = None
                 pii = "N/A"
                 description = None
                 category = "N/A"
@@ -141,7 +133,6 @@ def reference_soup(soup):
                 volume = "N/A"
                 number = "N/A"
                 pages = "N/A"
-                full_text = None
                 description = None
                 weburl = "N/A"
                 category = "N/A"
@@ -156,22 +147,11 @@ def reference_soup(soup):
                 volume = data["VOLUME"]
                 number = data["NUMBER"]
                 pages = data["PAGES"]
-                full_text = data["FULL_TEXT"]
                 description = data["DESCRIPTION"]
                 weburl = data["WEBURL"]
                 category = data["CATEGORY"]
 
 
-    reference_data = {"CITATION_COUNT":citation_count, "AVAILABILITY":status, "AUTHORS":authors, "YEAR":year,"TITLE":title, "CATEGORY":category, "PUBLICATION":publication,"TYPE":publication_type,"VOLUME":volume,"NUMBER":number,"PAGES":pages,"DESCRIPTION":description,"PII":pii, "WEBURL":weburl, "FULL_TEXT":full_text}
+    reference_data = {"CITATION_COUNT":citation_count, "AVAILABILITY":status, "AUTHORS":authors, "YEAR":year,"TITLE":title, "CATEGORY":category, "PUBLICATION":publication,"TYPE":publication_type,"VOLUME":volume,"NUMBER":number,"PAGES":pages,"DESCRIPTION":description,"PII":pii, "WEBURL":weburl}
 
     return reference_data
-
-
-
-
-
-
-
-
-#testing
-#print scrape_webpage("http://www.sciencedirect.com/science/article/pii/S0002914914023157")["RECOMMENDATIONS"]

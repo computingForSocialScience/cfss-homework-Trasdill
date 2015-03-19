@@ -38,11 +38,11 @@ def coordinator(arguments, size):
     c.execute("DROP TABLE IF EXISTS keywords")
     db.commit()
 
-    c.execute("CREATE TABLE IF NOT EXISTS article_data (Id INTEGER PRIMARY KEY AUTO_INCREMENT, Pub_Year VARCHAR(10), Publication VARCHAR(255), Category VARCHAR(100), Pub_Type VARCHAR(10), Pub_Volume VARCHAR(10), Pub_Number VARCHAR(10), Pages VARCHAR(10), Citation_Count VARCHAR(10), Pii VARCHAR(20), Weburl VARCHAR(100))")
+    c.execute("CREATE TABLE IF NOT EXISTS article_data (Id INTEGER PRIMARY KEY AUTO_INCREMENT, Pub_Year VARCHAR(10), Publication VARCHAR(255), Category VARCHAR(255), Pub_Type VARCHAR(255), Pub_Volume VARCHAR(10), Pub_Number VARCHAR(10), Pages VARCHAR(10), Citation_Count VARCHAR(10), Pii VARCHAR(20), Weburl VARCHAR(255))")
     c.execute("CREATE TABLE IF NOT EXISTS authors (Article_Id INTEGER, Authors VARCHAR(255))")
-    c.execute("CREATE TABLE IF NOT EXISTS reference_data (Citing_Id VARCHAR(10), Article_Id INTEGER PRIMARY KEY AUTO_INCREMENT, Status VARCHAR(50), Pub_Year VARCHAR(10), Publication VARCHAR(255), Category VARCHAR(100), Pub_Type VARCHAR(10), Pub_Volume VARCHAR(10), Pub_Number VARCHAR(10), Pages VARCHAR(10), Citation_Count VARCHAR(10), Pii VARCHAR(20), Weburl VARCHAR(100))")
+    c.execute("CREATE TABLE IF NOT EXISTS reference_data (Citing_Id VARCHAR(10), Article_Id INTEGER PRIMARY KEY AUTO_INCREMENT, Status VARCHAR(50), Pub_Year VARCHAR(10), Publication VARCHAR(255), Category VARCHAR(255), Pub_Type VARCHAR(255), Pub_Volume VARCHAR(10), Pub_Number VARCHAR(10), Pages VARCHAR(10), Citation_Count VARCHAR(10), Pii VARCHAR(20), Weburl VARCHAR(255))")
     c.execute("CREATE TABLE IF NOT EXISTS reference_authors (Citing_Id VARCHAR(10), Article_Id INTEGER, Authors VARCHAR(255))")
-    c.execute("CREATE TABLE IF NOT EXISTS recommended_articles (Citing_Id VARCHAR(10), Article_Id INTEGER PRIMARY KEY AUTO_INCREMENT, Pub_Year VARCHAR(10), Publication VARCHAR(255), Category VARCHAR(100), Pub_Type VARCHAR(10), Pub_Volume VARCHAR(10), Pub_Number VARCHAR(10), Pages VARCHAR(10), Citation_Count VARCHAR(10), Pii VARCHAR(20), Weburl VARCHAR(100))")
+    c.execute("CREATE TABLE IF NOT EXISTS recommended_articles (Citing_Id VARCHAR(10), Article_Id INTEGER PRIMARY KEY AUTO_INCREMENT, Pub_Year VARCHAR(10), Publication VARCHAR(255), Category VARCHAR(255), Pub_Type VARCHAR(255), Pub_Volume VARCHAR(10), Pub_Number VARCHAR(10), Pages VARCHAR(10), Citation_Count VARCHAR(10), Pii VARCHAR(20), Weburl VARCHAR(255))")
     c.execute("CREATE TABLE IF NOT EXISTS recommended_authors (Citing_Id VARCHAR(10), Article_Id INTEGER, Authors VARCHAR(255))")
     c.execute("CREATE TABLE IF NOT EXISTS keywords (Key_Words VARCHAR(1000))")
     insert = """INSERT INTO keywords (Key_words) VALUES (%s)"""

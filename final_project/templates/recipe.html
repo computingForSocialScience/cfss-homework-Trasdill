@@ -1,0 +1,46 @@
+<html>
+<head><title>Notes for a Better Soup</title></head>
+<body style="background-color: #FFD685">
+
+  <h2 style=text-align:center>Welcome to</h2>
+  <table width=100% height=10%>
+    <tr>
+      <td style="text-align: center; vertical-align: middle;">
+        <a href='/'><img src= {{ url_for('static', filename='Onion Soup.png') }} alt='Onion Soup'></img><a>
+      </td>
+    </tr>
+  </table>
+  <div style="text-align:center">
+
+      <p><h3>Important Notice</h3></p>
+      <div style="text-align:center; text-justify:inter-word">
+      <p>Onion Soup uses the PhantomJS headless browser to perform webscraping and will therefore not function on Linux. Files for both Windows and Mac versions of the browser are
+        included in the application directory. You must specify the path for the desired version at line 20 in the script "reference_data.py"</p>
+      <p>Onion Soup is powered by the ScienceDirect Search API to perform primary article collection.
+        As this service is IP-contingent, Onion Soup will only work properly from a valid public University internet service (e.g UChicago or another University's WiFi service)</p>
+      <p>As it operates on up to 6 MySQL tables and 3 json files, the current storage system for Onion Soup does not support storing results for multiple queries.
+        This may be implemented once an appropriate tagging system is implemented.</p>
+  </div>
+
+
+
+
+            <div style="text-align:center; bottom: 200px; text-justify:inter-word">
+            <p><h3>Notes on the Data</h3></p>
+
+            <p>Data collected through Onion Soup may be used both for consultation and analysis purposes.
+              Analysis assumes the availability of information and it's easy accessibility as key concepts.
+              Therefore, while double entries resulting from article collection are noted and referenced, they are not removed from the dataset, as a double-entried article implie a higher likelihood for a student to find and consult said article.</p>
+            <p>Possible areas of improvement for Onion Soup involve developing analysis of journals and autors. As metadata for both these elements are inaccessible from ScienceDirect Search under standard entitlement, they were only developed as far as initial webscraping allows.
+              Further interesting data could be obtained either via more complete entitlement or more developed webcrawling to include author pages in SCOPUS when available</p>
+            <p>For reasons of time and page format, instutions (labs, universities, etc.) attached to the articles were not scraped from the webpages.
+              However, this element would allow further understanding of the centers of production for certain areas of research and/or a trend of promotion by Elsevier of certain partners over others.</p>
+            <p>Networking tools using Pandas and Newtorkx may be used to develop the abovementioned data by applying network-analysis to certain relations in the data (e.g. authors-to-institutions, citation-count-to-authors, or topic-to-institutions once multiple topic capability is implemented)</p>
+            <p>Articles Categories, when available, were displayed as such, with no further formatting, due to time constraints. Efforts were made to make their graphic representation as clear as possible.
+              Implementation of basic NLTK processing of these categories would allow more efficient sorting of these categories and a finer grain of analysis.
+              NOTE: This element was not present for all articles and appears to have been added at the discretion of either the authors or Elsevier. Observing how and in what circumstances it is added may be interesting to observe.</p>
+
+            </div>
+
+</body>
+</html>

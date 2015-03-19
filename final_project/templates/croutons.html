@@ -26,7 +26,7 @@
 
         <select>
           {% for item in authors%}
-          <option value={{item}}>{{item}}. Appears {{authors[item]}} times.</option>
+          <option value={{item}}>{{item}}     ---        (Appears {{authors[item]}} times)</option>
           {% endfor %}
         </select>
       </td>
@@ -42,9 +42,45 @@
 
 
   <table width=100% height=0%>
+    <td style="text-align: center; "><h4>Frequency of Appearance for Journals</h4></td>
     <tr style="text-align:center"><td><img src= {{ url_for('static', filename='journals.png') }} alt='Bar Chart of Journals'></img></td></tr>
+    <tr><td style="text-align: center; vertical-align: middle;">----------------------------------------------------------------------------------------------------------------</td></tr>
+    <td style="text-align: center; vertical-align: middle;"><h4>Article Categories for All Directly Available Articles</h4></td>
     <tr style="text-align:center"><td><img src= {{ url_for('static', filename='categories.png') }} alt='Bar Chart of Categories'></img></td></tr>
+    <tr><td style="text-align: center; vertical-align: middle;">----------------------------------------------------------------------------------------------------------------</td></tr>
+    <td style="text-align: center; vertical-align: middle;"><h4>Years of Publication for All Available Articles</h4></td>
     <tr style="text-align:center"><td><img src= {{ url_for('static', filename='year_chart.png') }} alt='Bar Chart of Years'></img></td></tr>
+    <tr><td style="text-align: center; vertical-align: middle;">----------------------------------------------------------------------------------------------------------------</td></tr>
+    <td style="text-align: center; vertical-align: middle;"><h4>General Availability of Collected References</h4></td>
     <tr style="text-align:center"><td><img src= {{ url_for('static', filename='availability.png') }} alt='Pie Chart of Availability'></img></td></tr>
+    <tr><td style="text-align: center; vertical-align: middle;">----------------------------------------------------------------------------------------------------------------</td></tr>
+    <td style="text-align: center; vertical-align: middle;"><h4>Citation Counts for All Articles by Availability</h4></td>
     <tr style="text-align:center"><td><img src= {{ url_for('static', filename='citation_counts.png') }} alt='Histogram of Citations'></img></td></tr>
+  </table>
+
+
+
+
+  <table width=100% height=0%>
+    <tr><td style="text-align: center; vertical-align: middle;">----------------------------------------------------------------------------------------------------------------</td></tr>
+    <tr>
+      <td style="text-align: center; vertical-align: middle;">
+
+        <h4><u>{{repeats[1]}}</u> available articles appear multiple times. These are:</h4>
+        <p>
+        <select name='repeats' id='repeats'>
+          {% for item in repeats[0] %}
+          <option value="{{item['weburl']}}" onChange="window.open(this.options[this.selectedIndex].value,'_blank')">{{item['marker']}}. {{item['title']}} --- (Appears {{item['count']}} times)</option>
+          {% endfor %}
+        </select>
+        <script type="text/javascript">
+        var urlmenu = document.getElementById( 'repeats' );
+        urlmenu.onchange = function() {
+          window.open( this.options[ this.selectedIndex ].value );
+        };
+        </script>
+      </p>
+      </td>
+    </tr>
+    <tr><td style="text-align: center; vertical-align: middle;">----------------------------------------------------------------------------------------------------------------</td></tr>
   </table>

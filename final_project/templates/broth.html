@@ -12,7 +12,7 @@
 <h2 style="text-align: center">Primary Articles Collected</h2>
   <table>
 
-  {% for Id in articles %}
+  {% for Id in keys %}
 
   <tr><td>{{Id}}.</td><td><a href="/broth/{{Id}}"> "{{articles[Id]['TITLE']}}" </a></td></tr>
 
